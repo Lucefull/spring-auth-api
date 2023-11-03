@@ -1,0 +1,32 @@
+server:
+  port: 9000
+  servlet:
+    context-path: /api
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://keycloak.com.au:8180/realms/archangel
+
+logging:
+  level:
+    root: info
+
+env:
+  keycloak:
+    client-id: nest-auth-app
