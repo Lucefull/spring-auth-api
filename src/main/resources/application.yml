@@ -24,8 +24,10 @@ spring:
           issuer-uri: http://keycloak.com.au:8180/realms/archangel
 
 logging:
+  # file:
+  #   name: log/debug.log
   level:
-    root: info
+    root: none
 
 env:
   keycloak:
