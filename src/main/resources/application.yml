@@ -27,8 +27,11 @@ logging:
   # file:
   #   name: log/debug.log
   level:
-    root: none
+    root: info
 
 env:
   keycloak:
     client-id: nest-auth-app
+    url: http://keycloak.com.au:8180
+    realm: archangel
+    client-secret: pSYktmVBYw5YZqeAeAWwLDPvN6w9Tp56
