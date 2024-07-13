@@ -32,9 +32,9 @@ public class SecurityConfig {
 
                                                 .requestMatchers("/v3/**", "/swagger-ui/**")
                                                 .permitAll()
-                                                .requestMatchers(HttpMethod.POST, "/auth/**").permitAll()
-                                                .anyRequest()
-                                                .authenticated())
+                                                .requestMatchers("/authController/**")
+                                                .permitAll()
+                                                .anyRequest().authenticated())
                                 .oauth2ResourceServer(oauth2 -> oauth2
                                                 .jwt()
                                                 .jwtAuthenticationConverter(grantedAuthoritiesExtractor()))
@@ -54,12 +54,12 @@ public class SecurityConfig {
                 public Collection<GrantedAuthority> convert(Jwt jwt) {
 
                         Map<String, Collection<?>> resourceAcess = (Map<String, Collection<?>>) jwt.getClaims()
-                                        .get("resource_access");
+                                        .get("realm_access");
 
                         Map<String, Collection<?>> client = (Map<String, Collection<?>>) resourceAcess
                                         .get(GlobalValue.clientId);
 
-                        return client
+                        return resourceAcess
                                         .getOrDefault("roles", Collections.emptyList())
                                         .stream()
                                         .map(Object::toString)

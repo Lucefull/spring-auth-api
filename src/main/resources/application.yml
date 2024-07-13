@@ -1,34 +1,30 @@
 server:
   port: 9000
   servlet:
-    context-path: /api
+    context-path: /auth-api
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://localhost:5433/devbank
+    username: svc_auth
+    password: a.123456
 
   jpa:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: true
 
   security:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://keycloak.com.au:8180/realms/archangel
-
-logging:
-  # file:
-  #   name: log/debug.log
-  level:
-    root: none
-
+          issuer-uri: http://localhost:8080/realms/kong
 env:
   keycloak:
-    client-id: nest-auth-app
+    client-id: kong
+    url: http://localhost:8080
+    realm: kong
+    client-secret: wVhjm9oQATn5HRZ2Yj3WmVZ0EqhSKIeb
